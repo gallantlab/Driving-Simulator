@@ -1,0 +1,131 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350" Width="600" Height="350"
+        x:Class="Driving_Launcher.MainWindow" WindowStartupLocation="CenterScreen" Background="#c0202020"
+        Closing="Window_OnClosing" CanResize="False" >
+
+  <Window.Styles>
+    <Style Selector="TitleBar">
+      <Setter Property="Background" Value="#00000000" />
+    </Style>
+
+
+    <Style Selector="TabControl">
+      <Setter Property="Background" Value="#00000000"/>
+    </Style>
+    <Style Selector="TabControl WrapPanel">
+      <Setter Property="Background" Value="#00000000"/>
+    </Style>
+    <Style Selector="TabItem:focus">
+      <Setter Property="Foreground" Value="#1E90FF"/>
+      <Setter Property="Margin" Value="0 0 0 0"/>
+    </Style>
+
+    <Style Selector="TabItem:selected">
+      <Setter Property="Background" Value="#00000000"/>
+      <Setter Property="Margin" Value="0 0 0 0"/>
+    </Style>
+
+    <Style Selector="TabItem">
+      <Setter Property="Height" Value="34"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Background" Value="#2B579A"/>
+      <Setter Property="Foreground" Value="#F0F0F0"/>
+      <Setter Property="Margin" Value="0 0 0 0"/>
+      <Setter Property="Padding" Value="10 0"/>
+    </Style>
+  </Window.Styles>
+  <Grid>
+    <TabControl Margin="0, 0, 0, 0" Width="600" Name="MainPageTabControl">
+
+      <TabItem Header="Game" VerticalContentAlignment="Center" DoubleTapped="StatusBarPanel_OnDoubleTapped">
+        <Grid>
+          <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 12">
+              <TextBlock Text="Config file" Margin="12, 0" VerticalAlignment="Center"/>
+              <ComboBox Name="ConfigFileComboBox" VerticalAlignment="Center" Margin="12, 0" Width="160" SelectedIndex="0">
+                <ComboBoxItem Content="None"/>
+              </ComboBox>
+              <TextBlock Text="Graphics" Margin="12, 0" VerticalAlignment="Center"/>
+              <ComboBox Name="GraphicsComboBox" VerticalAlignment="Center" Margin="12, 0" Width="120" SelectedIndex="0">
+                <ComboBoxItem Content="Discrete"/>
+                <ComboBoxItem Content="Integrated"/>
+              </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <ToggleSwitch Name="FullscreenSwitch" Content="Fullscreen" Margin="12, 12, 64, 12"/>
+              <TextBlock Text="Resolution" VerticalAlignment="Center"/>
+              <ComboBox Name="ResolutionComboBox" VerticalAlignment="Center" Margin="12, 0" Width="150" SelectedIndex="2">
+                <ComboBoxItem Content="800x600"/>
+                <ComboBoxItem Content="1024x768"/>
+                <ComboBoxItem Content="1280x768"/>
+                <ComboBoxItem Content="1280x800"/>
+                <ComboBoxItem Content="1600x900"/>
+                <ComboBoxItem Content="1920x1080"/>
+              </ComboBox>
+            </StackPanel>
+            <TextBlock x:Name="OSInfoTextBlock" Text="OS" Margin="12, 0, 12, 12"/>
+            <StackPanel Orientation="Horizontal" Margin="0, 0">
+              <Button Name="StartOBSButton" Content="🔴 OBS Studio" Margin="8, 4" Click="StartOBSButton_OnClick"/>
+              <Button Name="OpenConfigFileButton" Content="Open Selected Config" Margin="8, 4" Click="OpenConfigFileButton_OnClick"/>
+              <Button Name="OpenConfigFolderButton" Content="Open Config Folder" Margin="8, 4" Click="OpenConfigFolderButton_OnClick"/>
+            </StackPanel>
+          </StackPanel>
+          <Button Name="PlayButton" Content="Play" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="12, 24" Click="PlayButton_OnClick" IsEnabled="False"/>
+          <StackPanel Name="RenderAllStackPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="False">
+            <ToggleSwitch Name="RenderAllSwitch" Margin="12, 24" Content="Render All" VerticalAlignment="Bottom"/>
+            <TextBox Name="RenderAllFPSTextBox" Text="15" Margin="12, 24" Watermark="" Width="12"/>
+            <TextBlock Text="fps" Margin="12, 24"/>
+          </StackPanel>
+          <Button Name="ExitButton" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ExitButton_OnClick"/>
+        </Grid>
+      </TabItem>
+
+      <TabItem Name="UpdatesTabItem" VerticalContentAlignment="Center">
+        <TabItem.Header>
+          <TextBlock Name="UpdatesTabTextBlock">Local Files</TextBlock>
+        </TabItem.Header>
+        <Grid>
+          <StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Name="GameStatusTextBlock" Text="Files up-to-date" Margin="12, 12"/>
+              <TextBlock Name="GameVersionTextBlock" Text="Version Unknown" Margin="12, 12"/>
+            </StackPanel>
+            <TextBlock Text="Game Directory" Margin="12, 12"/>
+            <StackPanel Orientation="Horizontal">
+              <TextBox Name="GameDirectoryTextBox" Margin="12, 0" Watermark="Local game folder" Width="468"/>
+              <Button Name="ChooseGameDirectoryButton" Content="Select..." Click="ChooseGameDirectoryButton_OnClick" Margin="0, 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Button Name="DownloadButton" Content="Download Files" Margin="12, 6" Click="DownloadButton_OnClick" IsEnabled="False"/>
+            </StackPanel>
+
+            
+            <TextBlock Text="OBS Path" Margin="12, 6"/>
+            <StackPanel Orientation="Horizontal">
+            <TextBox Name="OBSPathTextBox" Margin="12, 0" Watermark="Path to exe for OBS" Width="468"/>
+            <Button Name="ChooseOBSButton" Content="Select..." Click="ChooseOBSButton_OnClick" Margin="0, 0"/>
+              </StackPanel>
+
+            <ProgressBar Name="DownloadProgressBar" Maximum="100" HorizontalAlignment="Stretch" Margin="12, 24"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="About" VerticalContentAlignment="Center">
+        <StackPanel Margin="6">
+          <TextBlock Text="Driving experiment launcher" Margin="6"/>
+          <TextBlock Name="VersionTextBlock" Text="Version" Margin="6"/>
+          <Button Name="CheckForUpdatesButton" Content="Check for updates" Margin="6" Click="CheckForUpdatesButton_OnClick"/>
+        </StackPanel>
+      </TabItem>
+    </TabControl>
+    <Panel DoubleTapped="StatusBarPanel_OnDoubleTapped" Name="StatusBarPanel" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Center" Margin="0" Background="LightCoral" Width="600">
+      <TextBlock Name="StatusBarTextBlock" Text="Status" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 4"
+                 Foreground="White"/>
+    </Panel>
+  </Grid>
+</Window>

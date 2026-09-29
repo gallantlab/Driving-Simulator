@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <StartupObject>Driving_Launcher.Program</StartupObject>
+    <ApplicationIcon>doge.ico</ApplicationIcon>
+    <AssemblyVersion>1.1.10.0</AssemblyVersion>
+    <FileVersion>1.1.10.0</FileVersion>
+    <Version>1.1.10</Version>
+    <PackageIcon></PackageIcon>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Configurations>Debug;Release;Released</Configurations>
+    <IncludeSymbolsInSingleFile>false</IncludeSymbolsInSingleFile>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets\doge.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.S3Events" Version="1.2.0" />
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
+    <PackageReference Include="AWSSDK.S3" Version="3.5.9.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="5.0.0" />
+    <PackageReference Include="Sentry" Version="3.18.0" />
+   </ItemGroup>
+  <ItemGroup>
+    <None Include="doge.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="LauncherMainWindow.axaml.cs">
+      <DependentUpon>LauncherMainWindow.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

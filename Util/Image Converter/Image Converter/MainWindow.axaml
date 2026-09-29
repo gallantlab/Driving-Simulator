@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="800" Height="450"
+        x:Class="Image_Converter.MainWindow"
+        Title="Image Converter">
+  <DockPanel VerticalAlignment="Top">
+      <Menu DockPanel.Dock="Top" Background="Beige">
+          <MenuItem Header="_File">
+              <MenuItem Header="_Open Folder..." Name="OpenFolderMenuItem"/>
+              <MenuItem Header="_Save Converted..." Name="SaveConvertedMenuItem" Click="SaveConvertedMenuItem_OnClick" IsEnabled="False"/>
+              <Separator/>
+              <MenuItem Header="_Exit" Name="ExitMenuItem"/>
+          </MenuItem>
+          <MenuItem Header="_Edit">
+              <MenuItem Header="Copy"/>
+              <MenuItem Header="Paste"/>
+          </MenuItem>
+      </Menu>
+    <Grid DockPanel.Dock="Top" Margin="4" RowDefinitions="Auto,*,Auto,Auto">
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+          <Button Name="SelectFolderButton" Content="Select folder..." Margin="2, 4" Click="SelectFolderButton_OnClick"/>
+          <Label  VerticalAlignment="Center" Margin="2, 4"/>
+          <TextBox Name="SourceFolderTextBox" Margin="2, 4" Width="250" Watermark="Source images folder" 
+                   Text="{Binding SourceFolder}" IsReadOnly="True"/>
+          
+          <Label Content="Converter" Margin="6, 4, 4, 2" VerticalAlignment="Center"/>
+          <ComboBox Name="ConverterComboBox" VerticalAlignment="Center" SelectedIndex="0" Width="220" SelectionChanged="ConverterComboBox_OnSelectionChanged">
+            <ComboBoxItem Content="None"/>
+            <ComboBoxItem Content="Depth"/>
+            <ComboBoxItem Content="Semantic Segmentation"/>
+          </ComboBox>
+      </StackPanel>
+      <Viewbox Grid.Row="1" >
+        <Image Name="ImageDisplay" Width="400" Height="300"  Source="{Binding DisplayImage}" />
+      </Viewbox>
+        <Slider Name="FrameSlider" Grid.Row="2" Margin="8,2 " Value="0" Minimum="0" Maximum="100"/>
+      <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0, 0, 0, 8" HorizontalAlignment="Center">
+          <Button Content="Play"/>
+      </StackPanel>
+    </Grid>
+  </DockPanel>
+</Window>
